@@ -8,8 +8,7 @@ let winGame = document.getElementById("win");
 
 numOfLettersSecret.innerText = `The secret word have ${secretWord.length} letters`;
 
-function tryWord(wordPlayer, rightWord) {
-	// TODO: fix jeu sensible à la casse.   
+function tryWord(wordPlayer, rightWord) {  
 
     let wellPlaced = [];
     let missPlaced = [];
@@ -17,16 +16,40 @@ function tryWord(wordPlayer, rightWord) {
 
     let secretArray = rightWord.split('');
     let wordArray = wordPlayer.split('');
-    
+
+    let testArray = rightWord.split('');
     for (let i = 0; i < secretArray.length; i++) {
+
         if (secretArray[i] === wordArray[i]) {
             wellPlaced.push(wordArray[i]);
-        } else if (secretArray.includes(wordArray[i]) === false) {
-            notInWord.push(wordArray[i]);
-        } else {
+            testArray.splice(i, 1);
+            continue;
+        }
+        
+        if (testArray.includes(wordArray[i]) === true){
             missPlaced.push(wordArray[i]);
+            testArray.splice(i, 1);
+            continue;
         }  
+        if (secretArray.includes(wordArray[i]) === false) {
+            notInWord.push(wordArray[i]);
+            testArray.splice(i, 1);
+            
+        }
+        
     }
+    /*dinnnnnnaire*/
+
+    
+    // for (let i = 0; i < secretArray.length; i++) {
+    //     if (secretArray[i] === wordArray[i]) {
+    //         wellPlaced.push(wordArray[i]);
+    //     } else if (secretArray.includes(wordArray[i]) === false) {
+    //         notInWord.push(wordArray[i]);
+    //     } else {
+    //         missPlaced.push(wordArray[i]);
+    //     }  
+    // }
     
     return { 
         wellPlaced: wellPlaced, 
@@ -38,7 +61,7 @@ function tryWord(wordPlayer, rightWord) {
 function guess() {
     winGame.innerText = '';
 
-	let word = document.getElementById("word").value;
+	let word = document.getElementById("word").value.toLowerCase();
 
     if (wordLength(word, secretWord)) {
         numOfLettersSecret.innerText = `The secret word have ${secretWord.length} letters`;
