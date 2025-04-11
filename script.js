@@ -1,3 +1,5 @@
+import { wordLength} from './logic.js';
+
 let secretWord = 'dictionnaire'; 
 let numOfLettersSecret = document.getElementById("numOfLetters");
 let tryPlayer = document.getElementById("try");
@@ -31,10 +33,10 @@ function tryWord(wordPlayer, rightWord) {
             testArray.splice(i, 1);
             continue;
         }  
+        
         if (secretArray.includes(wordArray[i]) === false) {
             notInWord.push(wordArray[i]);
-            testArray.splice(i, 1);
-            
+            testArray.splice(i, 1); 
         }
         
     }
@@ -97,10 +99,7 @@ function lettersPlaces(wordPlayer, wordTry) {
     notInWordLetters.innerText = 'Not in the word: '+wordTry.notInWord.join(', ');
 }
 
-function wordLength(wordPlayer, rightWord) {
-    if (wordPlayer.length === rightWord.length) {
-        return true;
-    } else {
-        return false;
-    }
-}
+window.guess = guess;
+
+
+
